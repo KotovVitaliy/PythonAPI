@@ -1,10 +1,10 @@
 from requests import Response
-from lib.AssetionsHelper import AssertionsHelper
+from lib.data_factory import DataFactory
+from lib.assetions_helper import AssertionsHelper
 import allure
 
 
 class BaseCase:
-    main_url = "https://playground.learnqa.ru/ajax/api/"
     assertion_helper = None
 
     def setup(self):
@@ -19,3 +19,6 @@ class BaseCase:
     def get_cookie(self, response: Response, cookie_name):
         cookies = {cookie_name: response.cookies[cookie_name]}
         return cookies
+
+    def get_url(self) -> str:
+        return DataFactory.get().get_url()
