@@ -14,7 +14,6 @@ class Request:
     def _send(URL: str, data: dict, headers: dict, cookies: dict, method: str):
         additional_header = {'X-THIS_IS_TEST': 'True'}
         headers.update(additional_header)
-        print(headers)
 
         if method == 'get':
             # todo add params somehow

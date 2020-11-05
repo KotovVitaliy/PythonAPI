@@ -5,14 +5,20 @@ class Logger:
     data = ""
 
     def add(self, response: Response):
-        data_to_add = f"Response code: {response.status_code}\n"
+        cookies_as_dict = dict(response.cookies)
+        headers_as_dict = dict(response.headers)
+
+        data_to_add = f"\n-----\nResponse code: {response.status_code}\n"
         data_to_add += f"Response text: {response.text}\n"
-        # data_to_add += f"Response headers: {response.headers}\n"
-        # data_to_add += f"Response cookies: {response.cookies}\n"
+        data_to_add += f"Response headers: {headers_as_dict}\n"
+        data_to_add += f"Response cookies: {cookies_as_dict}\n"
         data_to_add += "\n-----\n"
 
         self.data += data_to_add
 
     def show_all_data(self):
-        print(self.data)
-        print("End of log")
+        if len(self.data) > 0:
+            print("\n\nSTART OF LOG")
+            print(self.data)
+            print("END OF LOG\n\n")
+
