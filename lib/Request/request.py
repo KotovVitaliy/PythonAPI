@@ -1,4 +1,5 @@
 import requests
+from lib.logger import Logger
 
 
 class Request:
@@ -16,9 +17,11 @@ class Request:
         headers.update(additional_header)
 
         if method == 'get':
-            # todo add params somehow
-            return requests.get(URL, params=data, headers=headers, cookies=cookies)
+            response = requests.get(URL, params=data, headers=headers, cookies=cookies)
         elif method == 'post':
-            return requests.post(URL, data=data, headers=headers, cookies=cookies)
+            response = requests.post(URL, data=data, headers=headers, cookies=cookies)
         else:
             raise Exception(f'Bad HTTP method "{method}" was received')
+
+        Logger.get_instance().add(response)
+        return response
